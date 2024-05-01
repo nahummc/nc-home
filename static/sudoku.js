@@ -24,14 +24,42 @@ document.addEventListener('DOMContentLoaded', function() {
         for (let i = 1; i <= 9; i++) {
             let button = document.createElement('button');
             button.textContent = i;
+            button.dataset.number = i; // Use dataset to store the number value
             button.addEventListener('click', function() {
-                selectedNumber = i;
+                selectedNumber = parseInt(this.dataset.number); // Parse number from dataset
                 console.log(`Number selected: ${selectedNumber}`);
             });
             numberSelectionDiv.appendChild(button);
         }
         numberSelectionDiv.style.display = 'flex'; // Display the number selection
+        disableUnplayableNumbers(playableBoard); // Disable unplayable numbers
     }
+
+    function disableUnplayableNumbers(boardData) {
+        const gridSize = 9;
+        let numberCounts = new Array(10).fill(0); // Index 0 is not used
+        
+        // Count occurrences of each number in the board
+        boardData.forEach(row => {
+            row.forEach(cell => {
+                if (cell !== 0) {
+                    numberCounts[cell]++;
+                }
+            });
+        });
+    
+        // Disable buttons for numbers that already have 9 occurrences
+        for (let i = 1; i <= gridSize; i++) {
+            const button = document.querySelector(`button[data-number="${i}"]`);
+            if (numberCounts[i] === gridSize) {
+                button.disabled = true;
+            } else {
+                button.disabled = false;
+            }
+        }
+    }
+    
+    
 
     function generateSolvedBoard() {
         console.log('Generating solved board...');
@@ -129,6 +157,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Check if the placed number matches the solved board
             if (selectedNumber === solvedBoard[row][col]) {
                 console.log('Correct move!');
+                disableUnplayableNumbers(playableBoard); // Check and disable unplayable numbers
             } else {
                 console.log('Incorrect move, try again!');
                 playableBoard[row][col] = 0; // Reset the cell if the move is wrong
@@ -136,6 +165,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }
+    
 
     function updateStylesForCompletedSegments(playableBoard, solvedBoard) {
         const gridSize = 9;
