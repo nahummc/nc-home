@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
         container.innerHTML = '';
         const grid = document.createElement('div');
         grid.className = 'grid';
-
+    
         boardData.forEach((row, rowIndex) => {
             const rowDiv = document.createElement('div');
             rowDiv.className = 'row';
@@ -115,7 +115,10 @@ document.addEventListener('DOMContentLoaded', function() {
             grid.appendChild(rowDiv);
         });
         container.appendChild(grid);
+        updateStylesForCompletedSegments(boardData, solvedBoard); // Check for completed segments
     }
+    
+    
 
     function handleCellClick(row, col) {
         if (selectedNumber !== null && playableBoard[row][col] === 0) {
@@ -133,5 +136,55 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }
+
+    function updateStylesForCompletedSegments(playableBoard, solvedBoard) {
+        const gridSize = 9;
+        const subGridSize = 3;
+    
+        // Check rows and columns for completion and correctness
+        for (let i = 0; i < gridSize; i++) {
+            let rowComplete = true;
+            let colComplete = true;
+    
+            for (let j = 0; j < gridSize; j++) {
+                if (playableBoard[i][j] !== solvedBoard[i][j] || playableBoard[j][i] !== solvedBoard[j][i]) {
+                    rowComplete = false;
+                    colComplete = false;
+                }
+            }
+    
+            if (rowComplete) {
+                document.querySelectorAll(`.row:nth-child(${i + 1}) .cell`).forEach(cell => cell.classList.add('filled'));
+            }
+            if (colComplete) {
+                for (let k = 0; k < gridSize; k++) {
+                    document.querySelector(`.row:nth-child(${k + 1}) .cell:nth-child(${i + 1})`).classList.add('filled');
+                }
+            }
+        }
+    
+        // Check 3x3 grids for completion and correctness
+        for (let row = 0; row < gridSize; row += subGridSize) {
+            for (let col = 0; col < gridSize; col += subGridSize) {
+                let gridComplete = true;
+                for (let r = row; r < row + subGridSize; r++) {
+                    for (let c = col; c < col + subGridSize; c++) {
+                        if (playableBoard[r][c] !== solvedBoard[r][c]) {
+                            gridComplete = false;
+                        }
+                    }
+                }
+                if (gridComplete) {
+                    for (let r = row; r < row + subGridSize; r++) {
+                        for (let c = col; c < col + subGridSize; c++) {
+                            document.querySelector(`.row:nth-child(${r + 1}) .cell:nth-child(${c + 1})`).classList.add('filled');
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    
     
 });
