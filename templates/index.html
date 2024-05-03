@@ -1,19 +1,13 @@
+<!-- templates/index.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Sudoku Game</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <title>Vue.js Example</title>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </head>
 <body>
-    <div id="app" class="container">
-        <h1>Welcome to the Sudoku Game!</h1>
-        <p>This is a basic Sudoku game built with Flask and Vue.js.</p>
-        <router-link to="/sudoku">Start playing Sudoku</router-link>
-        <a href="/sudoku">Start playing Sudoku</a>
-        <!-- Vue components will be rendered here -->
-    </div>
-    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  <div id="app">
+    {{ message }}
+  </div>
 </body>
 </html>

@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const numberSelectionDiv = document.getElementById("numberSelection");
   const mistakeCounter = document.getElementById("mistakeCounter");
   const timerDisplay = document.getElementById("timer");
+  const scoreDisplay = document.getElementById("score");
 
   let solvedBoard = [];
   let playableBoard = [];
@@ -341,6 +342,7 @@ document.addEventListener("DOMContentLoaded", function () {
       numberSelectionDiv.innerHTML = "";
       mistakeCounter.textContent = "";
       timerDisplay.textContent = "";
+      scoreDisplay.textContent = "";
     }
   }
 });
