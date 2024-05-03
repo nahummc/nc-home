@@ -71,9 +71,15 @@
     </div>
     <div id="sudokuContainer"></div>
 
-    <div id="numberSelection" style="display: none;" ></div>
+    <div id="numberSelection" style="display: none;"></div>
 
-    <script src="{{ url_for('static', filename='sudoku.js') }}"></script>
+    <div id="mistakeCounter">Mistakes: 0</div>
+    <div id="timer">Time: 0:00</div>
+    <div id="correctStreak">Correct Streak: 0</div>
+    <div id="score">Score: 0</div>
+
+
+    <script src="{{ url_for('static', filename='js/sudoku.js') }}"></script>
 
 </body>
 
