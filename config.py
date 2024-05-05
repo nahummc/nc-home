@@ -9,3 +9,5 @@ class Config:
         'sqlite:///' + os.path.join(basedir, 'games_app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = 'your_secret_key_here'
+    # SESSION_TYPE = 'filesystem'
+    

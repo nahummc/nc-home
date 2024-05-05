@@ -1,25 +1,22 @@
-# app.py
-
-from flask import Flask, render_template
+from flask import Flask
+from flask_migrate import Migrate  # Import Flask-Migrate
 from models import db
+from routes.base_routes import base_bp
 from routes.user_routes import user_bp
 from config import Config
+from flask_jwt_extended import JWTManager
 
 app = Flask(__name__)
 app.config.from_object(Config)
 
 db.init_app(app)
 
-app.register_blueprint(user_bp)
+migrate = Migrate(app, db)  # Initialize Flask-Migrate
 
-@app.route('/')
-def index():
-    print("Hello World")
-    return render_template('index.html')
+jwt = JWTManager(app)
 
-@app.route('/sudoku')
-def sudoku():
-    return render_template('sudoku.html')  
+app.register_blueprint(base_bp, url_prefix='/')
+app.register_blueprint(user_bp, url_prefix='/user')
 
 if __name__ == '__main__':
     with app.app_context():
