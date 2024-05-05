@@ -1,13 +1,13 @@
 <!-- templates/index.html -->
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Vue.js Example</title>
-  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
-</head>
-<body>
-  <div id="app">
-    {{ message }}
-  </div>
-</body>
-</html>
+
+{% extends "base.html" %}
+
+{% block title %}
+Welcome to Sudoku Game
+{% endblock %}
+
+{% block content %}
+<h1>Welcome to the Sudoku Game!</h1>
+<p>This is a basic Sudoku game built with Flask.</p>
+<a href="/sudoku">Start playing Sudoku</a>
+{% endblock %}
