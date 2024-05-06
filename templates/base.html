@@ -1,28 +1,18 @@
-<!-- templates/base.html -->
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Welcome{% endblock %}</title>
+    <title>{% block title %}My Flask App{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
-
 <body>
     <nav>
         <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/sudoku">Sudoku</a></li>
-            <li><a href="/register">Register</a></li>
-            <li><a href="/login">Login</a></li>
-
-            <!-- Display user information if logged in -->
-            {% if user_id %}
-                <li><span>Welcome, {{ username }} (ID: {{ user_id }})</span></li>
-            {% endif %}
-            
+            <li><a href="{{ url_for('main.index') }}">Home</a></li>
+            <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+            <li><a href="{{ url_for('auth.register') }}">Register</a></li>
+            <!-- Add more links as needed -->
         </ul>
     </nav>
 
@@ -35,5 +25,4 @@
         <p>&copy; 2024 Your App</p>
     </footer>
 </body>
-
 </html>

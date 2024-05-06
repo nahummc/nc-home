@@ -1,13 +1,8 @@
 # config.py
 
-import os
-
-basedir = os.path.abspath(os.path.dirname(__file__))
-
 class Config:
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-        'sqlite:///' + os.path.join(basedir, 'games_app.db')
+    DEBUG = True
+    SECRET_KEY = 'your_secret_key'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///nc_games_1.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SECRET_KEY = 'your_secret_key_here'
-    # SESSION_TYPE = 'filesystem'
-    
+    # Add more configuration options here as needed
