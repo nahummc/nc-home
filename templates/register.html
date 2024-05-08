@@ -1,0 +1,60 @@
+<!-- register.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+</head>
+<body>
+    <h1>User Registration</h1>
+    <form method="POST" action="{{ url_for('auth.register') }}" enctype="application/json">
+        <label for="fname">First Name:</label><br>
+        <input type="text" id="fname" name="fname" required><br>
+        <label for="lname">Last Name:</label><br>
+        <input type="text" id="lname" name="lname" required><br>
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username" required><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required><br>
+        <button type="submit">Register</button>
+    </form>
+    <script>
+        function autofillFields() {
+            var firstName = generateRandomString(5);
+            var lastName = generateRandomString(7);
+            var username = generateRandomString(10);
+            var email = generateRandomEmail();
+           // var password = generateRandomString(8);
+
+           var password = "password";
+
+
+            document.getElementById('fname').value = firstName;
+            document.getElementById('lname').value = lastName;
+            document.getElementById('username').value = username;
+            document.getElementById('email').value = email;
+            document.getElementById('password').value = password;
+        }
+
+        function generateRandomString(length) {
+            var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            var result = '';
+            for (var i = 0; i < length; i++) {
+                result += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return result;
+        }
+
+        function generateRandomEmail() {
+            var email = generateRandomString(8) + '@example.com';
+            return email;
+        }
+
+        autofillFields();
+    </script>
+</body>
+</html>

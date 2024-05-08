@@ -1,6 +1,7 @@
 # config.py
+import os
 
-class Config:
+class Config(object):
     DEBUG = True
     SECRET_KEY = 'your_secret_key'
     SQLALCHEMY_DATABASE_URI = 'sqlite:///nc_games_1.db'
